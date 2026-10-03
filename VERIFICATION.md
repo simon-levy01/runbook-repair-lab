@@ -35,3 +35,11 @@ Environment/claim files, CLI logs, generated output, node_modules, `.next` and `
 Deployment is static: root `web`, install `npm ci`, build `npm run build`, publish `out`. No runtime SSR worker, Sanity write token, AI key, OAuth grant or CORS change is required. Each build performs a fresh public Sanity read; content edits require rebuilding/redeploying. The displayed timestamp is the snapshot build time. The parent owns demo and DEV publication.
 
 The original authenticated Sanity CLI document-validation run was interrupted and is not claimed as passing. Public response contract validation, schema typecheck and actual frontend verification replace that credential-dependent check.
+
+## Owner workflow extension verification
+
+`npm test`: 19 passed, zero failed, including browser/Node fingerprint parity, semantic/reference changes, valid/invalid/stale proposals, required enabled steps, pending-only decisions, atomic source/proposal revision guards and interrupted decision retries. `npm run lint`, fresh actual-backend Next static export, Studio typecheck and `npm --prefix sanity run build` passed. The real-data browser suite passed six groups at 1400/768/390/320px, with zero page errors; the current public dataset has no repairProposal documents and the frontend says so explicitly.
+
+`node scripts/verify-workflow.mjs`: public proposal count 0; valid unauthenticated same-value guide patch denied with HTTP 403, changed documents 0. No credential sent. Invalid/nonexistent mutation targets were not used as permission evidence.
+
+Independent read-only review found no material source blocker. **Live signed-in proposal creation, approval and rejection remain pending the owner's browser sign-in.** Do not describe this workflow as demonstrated live until those operations and a rebuilt approved snapshot are verified. Source code provides a custom Studio workflow; it does not integrate Sanity App SDK or native Workflows.

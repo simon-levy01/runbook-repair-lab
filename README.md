@@ -72,3 +72,11 @@ Studio can be run with `npm --prefix sanity run dev` and the owner's normal brow
 `npm run check:secrets` scans tracked source, built browser assets and the export for credential patterns and excluded files. Generated screenshots/results and build outputs remain Git-ignored.
 
 See [PLAN.md](PLAN.md), [BUILD_LOG.md](BUILD_LOG.md), and [VERIFICATION.md](VERIFICATION.md) for decisions and evidence.
+
+## Owner repair proposals
+
+The **Repair review** Studio tab creates real `repairProposal` documents in the same Sanity dataset and explicitly approves or rejects pending proposals. Run `npm --prefix sanity run dev`, open http://localhost:3333 and sign in as the owning administrator. No write key is needed. Proposals contain only fictional guide/condition data; no owner profile is copied into the public dataset.
+
+Approval validates every step and atomically guards revisions of the proposal, guide and all referenced tools/prerequisites. A metadata-only guard field may update document revisions; guide instructions and defaults are unchanged. Full modeled-content fingerprints invalidate stale approvals, including reference-only changes. The public build accepts only matching, valid approved repairs. 'Try owner-approved repair' loads those conditions locally; Reset still restores the published starting conditions. Content decisions require rebuilding/redeploying.
+
+This is a custom Studio workflow, not Sanity App SDK or native Workflows. Existing project write permissions are the security boundary; administrator UI checks do not restrict a trusted administrator using the API. There is no anonymous mutation endpoint or runtime server key. Keep public write permissions absent. [Workflow plan and owner verification status](docs/repair-workflow.md).

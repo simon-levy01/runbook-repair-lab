@@ -11,7 +11,15 @@ import {
   type Guide,
   type Experiment,
 } from "../lib/model";
-function LabExperiment({ guide, ready }: { guide: Guide; ready: boolean }) {
+function LabExperiment({
+  guide,
+  ready,
+  approved,
+}: {
+  guide: Guide;
+  ready: boolean;
+  approved?: Experiment;
+}) {
   const storageKey = `runbook-repair:v1:${guide.id}`;
   const [initial] = useState(() => {
     if (!ready) return { experiment: baseline(guide), available: true };
@@ -79,6 +87,22 @@ function LabExperiment({ guide, ready }: { guide: Guide; ready: boolean }) {
             {enabled} / {guide.steps.length} enabled
           </span>
         </div>
+        <section className="status-strip">
+          <span>
+            {approved
+              ? "Owner-approved repair available in this snapshot."
+              : "No current owner-approved repair in this snapshot."}
+          </span>
+          {approved && (
+            <button
+              onClick={() =>
+                update(approved, "Loaded owner-approved conditions locally.")
+              }
+            >
+              Try owner-approved repair
+            </button>
+          )}
+        </section>
         <ol className="steps">
           {guide.steps.map((step, index) => {
             const issues = findings.filter((f) => f.step === step.id);
@@ -255,7 +279,13 @@ function LabExperiment({ guide, ready }: { guide: Guide; ready: boolean }) {
     </>
   );
 }
-export default function Lab({ guides }: { guides: Guide[] }) {
+export default function Lab({
+  guides,
+  approved = {},
+}: {
+  guides: Guide[];
+  approved?: Record<string, Experiment>;
+}) {
   const ready = useSyncExternalStore(subscribe, clientSnapshot, serverSnapshot);
   const [selectedId, setSelectedId] = useState(guides[0].id);
   const guide = guides.find((g) => g.id === selectedId) ?? guides[0];
@@ -298,6 +328,7 @@ export default function Lab({ guides }: { guides: Guide[] }) {
         key={`${guide.id}:${guide.revision}:${ready}`}
         guide={guide}
         ready={ready}
+        approved={approved[guide.id]}
       />
     </div>
   );

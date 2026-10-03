@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { resolve, relative } from "node:path";
 import { execFileSync } from "node:child_process";
 const root = resolve(".");
@@ -40,6 +40,7 @@ function walk(folder) {
 }
 walk(resolve(root, "web/.next/static"));
 walk(resolve(root, "web/out"));
+if (existsSync(resolve(root, "sanity/dist"))) walk(resolve(root, "sanity/dist"));
 if (violations.length) {
   console.error(
     "Secret/artifact scan found suspect file paths (values withheld):",

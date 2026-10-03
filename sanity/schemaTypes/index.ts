@@ -1,3 +1,4 @@
+import {repairProposal} from './repairProposal'
 import {defineType, defineField, defineArrayMember} from 'sanity'
 const requiredText = (name: string, title?: string) =>
   defineField({name, title, type: 'string', validation: (r) => r.required().max(2000)})
@@ -135,4 +136,4 @@ export const guide = defineType({
     }),
   ],
 })
-export const schemaTypes = [tool, prerequisite, guide]
+export const schemaTypes = [tool, prerequisite, guide, repairProposal]

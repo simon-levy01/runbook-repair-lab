@@ -29,6 +29,30 @@ try {
     () => !document.querySelector("button.primary").disabled,
   );
   assert.equal(await page.locator(".guide-choice").count(), 3);
+  const approvedAction = page.getByRole("button", {
+    name: "Try owner-approved repair",
+    exact: true,
+  });
+  if (await approvedAction.count()) {
+    await approvedAction.click();
+    assert.equal(await page.locator(".passed").count(), 3);
+    await page
+      .getByRole("button", { name: "Reset experiment", exact: true })
+      .click();
+    results.push(
+      "Actual owner-approved Sanity repair loads locally and resets",
+    );
+  } else {
+    assert.equal(
+      await page
+        .getByText("No current owner-approved repair in this snapshot.", {
+          exact: true,
+        })
+        .count(),
+      1,
+    );
+    results.push("Actual snapshot truthfully shows no owner-approved repair");
+  }
   assert.ok((await page.locator(".findings li").count()) > 0);
   await page.screenshot({
     path: "output/playwright/desktop-initial.png",

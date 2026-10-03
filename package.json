@@ -12,7 +12,8 @@
     "start": "npm --prefix web run start",
     "test:browser": "node tests/browser.mjs",
     "verify:backend": "node --experimental-strip-types scripts/verify-public.mjs",
-    "check:secrets": "node scripts/check-secrets.mjs"
+    "check:secrets": "node scripts/check-secrets.mjs",
+    "verify:workflow": "node scripts/verify-workflow.mjs"
   },
   "devDependencies": {
     "playwright": "1.60.0"

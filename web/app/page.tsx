@@ -1,8 +1,10 @@
+import { getApprovedRepairs } from "../lib/approved-repairs";
 import Link from "next/link";
 import Lab from "../components/lab";
 import { getGuides, projectId, dataset, publicDatasetUrl } from "../lib/sanity";
 export default async function Home() {
   const guides = await getGuides();
+  const approved = await getApprovedRepairs(guides);
   const snapshotAt = new Date().toISOString();
   return (
     <>
@@ -38,7 +40,7 @@ export default async function Home() {
             Published Sanity snapshot<span>Browser-local experiments</span>
           </div>
         </section>
-        <Lab guides={guides} />
+        <Lab guides={guides} approved={approved} />
         <section className="provenance">
           <div>
             <h2>Structured content. Explainable findings.</h2>

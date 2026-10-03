@@ -25,3 +25,13 @@ Official sources: https://dev.to/challenges/sanity-2026-09-16 ; https://dev.to/p
 - Final real-data static browser suite passed all five groups at 1400/768/390/320px. Actual Sanity document IDs were verified in exported HTML and local experiment state; browser page errors were zero. Desktop and mobile screenshots were visually inspected.
 - Unavailable public dataset correctly failed static export. The final successful export was then rebuilt fresh from the actual production dataset. Snapshot build time is displayed in UTC.
 - Final source/export secret-pattern and exclusion checks passed: 48 tracked source files and 38 browser/export assets. No revoked credential was reused, no replacement created, and no demo/DEV entry published by this task.
+
+## 2026-10-03 owner review extension
+
+- Added a custom Sanity Studio Repair review tool and structured repairProposal schema. Studio uses its existing signed-in browser client; no replacement token, OAuth/CORS change, paid service or deployment was introduced.
+- Pending proposals require compatible published tool releases and every guide step enabled. Approval atomically checks proposal/source revisions and writes metadata-only dependency guards; rejection only changes the pending proposal. Full modeled-content fingerprints work identically in Node and browsers and exclude raw revisions/guard metadata.
+- Public builds read only approved proposals, revalidate their content fingerprint/conditions and offer a local try/reset action. Static snapshots still require rebuild/redeploy after Sanity changes.
+- 19 deterministic tests passed. Next.js static export, lint, Studio typecheck/build and real-data browser checks passed. Six browser groups include truthful absence of an approved repair, reset, interrupted reload, denied/corrupt storage and desktop/mobile/tablet layout; no page errors.
+- Live public proposal query returned zero documents. A valid anonymous same-value guide patch was denied with HTTP 403 and changed no documents. Empty/invalid-revision requests were inconclusive because preflight validation precedes authorization; they are not claimed as authorization evidence.
+- Independent source review found no material blocker. Live owner-authenticated create/approve/reject is pending Simon's normal Studio sign-in at localhost:3333. No native Workflows or App SDK integration is claimed. The parent owns existing demo/article updates.
+- Final secret/artifact scan passed for all 57 tracked source files and 66 generated Next/Studio browser assets; no credential values were inspected or printed. Anonymous Studio reached its normal sign-in UI with zero page errors. Local Studio remains running for the owner's live verification.
