@@ -1,29 +1,37 @@
 # Verification record
 
-Verification is deliberately separated into actual backend evidence and offline synthetic evidence.
+## Actual public Sanity evidence
 
-## Completed
+Project `ipp6nys2`, public dataset `production`, contains 3 fictional tools, 4 prerequisites and 3 guides. The owner claimed the project and confirmed setup-token deletion on October 3, 2026. The revoked environment entry and this project's local CLI recovery record were removed; unrelated configuration was preserved. No replacement credential was created or used.
 
-- Official Sanity CLI provisioned the real public project `ipp6nys2`, dataset `production`.
-- The seed API returned IDs for 10 fictional documents: 3 tools, 4 prerequisites and 3 guides. No real/personal/private content was used.
-- Node deterministic tests: **15 passed, 0 failed**. Includes each baseline and repair, inclusive version endpoints, missing and unknown prerequisites, skipped/later/failed producers, impossible release intersections, corrupt/stale/extra stored properties and reference-only content changes.
-- Next.js optimized production build from an empty `.next` directory and TypeScript: passed.
-- Web ESLint: passed with no errors or warnings after scaffold cleanup.
-- Standalone Studio TypeScript: passed (`npx tsc --noEmit`).
-- Independent source review: no high severity source findings; content fingerprinting was added to invalidate experiments when referenced tools/prerequisites change. Editor remount also includes content revision to handle in-session content refreshes.
+`npm run verify:backend` passed with `authenticated: false`:
 
-## Pending live-backend verification
+| Guide                  | Actual Sanity document ID | Steps | Baseline findings | Repaired findings |
+| ---------------------- | ------------------------- | ----- | ----------------- | ----------------- |
+| Build a paper town     | cpzPQInBrCoN3lSGL6JQrG    | 3     | 7                 | 0                 |
+| Light a lantern garden | gu4Ycht4w1LZ0sMorlizai    | 3     | 7                 | 0                 |
+| Stitch a pocket atlas  | cpzPQInBrCoN3lSGL6JRAg    | 3     | 6                 | 0                 |
 
-A setup token redaction failure exposed write-token text in a tool result. The claim URL was not exposed. Credential-dependent work was stopped; the owner must claim the project and revoke the setup token. No replacement token is required by the public application. No credentials are included in this record.
+## Build and checks
 
-The Sanity CLI document-validation process was interrupted and is **not** claimed as passing. Live public query/render checks and publication remain paused until revocation is confirmed. Afterward, all remaining backend verification can use unauthenticated public HTTP reads. No additional writes are needed for the implemented app.
+- 15 deterministic unit tests passed: baseline/repair, inclusive release boundaries, missing/unknown capabilities, skipped/later/failed producers, conflicting release intervals, corrupt/stale stored state and referenced-content changes.
+- Web lint and TypeScript passed. Standalone Studio TypeScript passed.
+- Clean Next.js static export passed using fresh real public Sanity HTTPS reads at build time. Exported HTML contains all three actual document IDs and snapshot disclosure. No synthetic loader/interception was used.
+- A read against a nonexistent dataset in the same project caused the build to fail as expected. A valid dataset was then rebuilt successfully. Invalid/unavailable content cannot produce a successful replacement export.
+- Independent review verified the complete content fingerprint, hydration/persistence path, static export conversion, bounded HTTPS read and local preview server. No material blockers remained.
 
-## Offline browser evidence
+## Browser evidence
 
-The browser test runs the production bundle with a test-only fetch preload serving synthetic fixtures. Screenshots and JSON results are generated under ignored `output/playwright/`. They are not evidence of live Sanity rendering. The final offline browser suite passed all six groups: all three guide repairs/skip/reset flows; interrupted reload and guide isolation; corrupt storage; desktop 1400px, mobile 390/320px and tablet 768px overflow and controls; storage-denied mode; isolated synthetic backend outage. No browser page errors were recorded. Desktop and mobile screenshots were inspected for layout, typography, colors, finding explanations and accessible controls. Mobile controls were moved above steps and explanation font size increased.
+Final browser results are generated under ignored `output/playwright/`. This suite targets the export built from real public Sanity data. It covers all guide repairs, skipped-step propagation, re-enable/reset, interrupted reload, guide isolation, corrupt/blocked storage and 1400/768/390/320px desktop/tablet/mobile overflow. It verifies actual Sanity document IDs in browser-local state. All five workflow groups passed on the real Sanity snapshot; actual document IDs matched, browser page errors were zero.
 
-Secret-pattern and artifact exclusion checks passed for 47 tracked source files and 13 built browser assets. Both local environment files and generated QA artifacts are Git-ignored. This offline scan checks credential patterns and tracked file exclusions; it does not read or print live credential values.
+Desktop and mobile screenshots are inspected for layout, type size, explanation readability, colors and usable controls. Mobile repair controls precede the ordered steps.
 
-## Publication
+Earlier offline QA used clearly identified synthetic fixtures while credential-dependent work was paused; that evidence is historical and is not presented as actual backend verification. The obsolete synthetic runtime preload was removed.
 
-The source is MIT licensed. GitHub push and a public demo/DEV entry have not occurred. The parent owns demo and article publication.
+## Secret exclusion and deployment
+
+Environment/claim files, CLI logs, generated output, node_modules, `.next` and `out` are excluded from Git. Secret-pattern/exclusion checks passed for 48 tracked source files and 38 generated browser/export files, without displaying credential values. The source is MIT licensed and truthfully credits OpenAI Codex.
+
+Deployment is static: root `web`, install `npm ci`, build `npm run build`, publish `out`. No runtime SSR worker, Sanity write token, AI key, OAuth grant or CORS change is required. Each build performs a fresh public Sanity read; content edits require rebuilding/redeploying. The displayed timestamp is the snapshot build time. The parent owns demo and DEV publication.
+
+The original authenticated Sanity CLI document-validation run was interrupted and is not claimed as passing. Public response contract validation, schema typecheck and actual frontend verification replace that credential-dependent check.

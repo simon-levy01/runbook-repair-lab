@@ -23,7 +23,7 @@ for (const file of files) {
     !file.endsWith(".env.example")
   )
     violations.push(file);
-  if (/(^|\/)(?:node_modules|\.next|dist|output)\//.test(file))
+  if (/(^|\/)(?:node_modules|\.next|out|dist|output)\//.test(file))
     violations.push(file);
   inspect(file);
 }
@@ -39,6 +39,7 @@ function walk(folder) {
   }
 }
 walk(resolve(root, "web/.next/static"));
+walk(resolve(root, "web/out"));
 if (violations.length) {
   console.error(
     "Secret/artifact scan found suspect file paths (values withheld):",

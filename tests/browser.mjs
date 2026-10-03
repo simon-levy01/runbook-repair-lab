@@ -145,31 +145,21 @@ try {
   results.push(
     "Storage-denied flow remains usable and explains refresh limitation",
   );
+  const sanityDocumentIds = await page.evaluate(() =>
+    Object.keys(localStorage)
+      .filter((key) => key.startsWith("runbook-repair:v1:"))
+      .map((key) => key.slice("runbook-repair:v1:".length)),
+  );
+  assert.equal(sanityDocumentIds.length, 3);
+  assert.ok(
+    sanityDocumentIds.every((id) => /^[A-Za-z0-9]{20,}$/.test(id)),
+    "Expected actual Sanity document IDs, not fixture aliases",
+  );
   await context.close();
-  if (process.env.TEST_FAILURE_URL) {
-    const failurePage = await browser.newPage();
-    await failurePage.goto(process.env.TEST_FAILURE_URL, {
-      waitUntil: "networkidle",
-    });
-    assert.equal(
-      await failurePage
-        .getByRole("heading", { name: "The guide library is unavailable" })
-        .count(),
-      1,
-    );
-    assert.equal(await failurePage.locator(".guide-choice").count(), 0);
-    await failurePage.screenshot({
-      path: "output/playwright/service-error.png",
-      fullPage: true,
-    });
-    await failurePage.close();
-    results.push(
-      "Backend failure shows truthful unavailable state, without synthetic fallback",
-    );
-  }
   const report = {
     mode: process.env.TEST_MODE ?? "live-public-backend",
     base,
+    sanityDocumentIds,
     passed: results,
     consoleErrors: errors,
   };

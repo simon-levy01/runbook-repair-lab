@@ -1,14 +1,9 @@
 import Link from "next/link";
 import Lab from "../components/lab";
 import { getGuides, projectId, dataset, publicDatasetUrl } from "../lib/sanity";
-export const dynamic = "force-dynamic";
 export default async function Home() {
-  let guides;
-  try {
-    guides = await getGuides();
-  } catch {
-    /* A truthful service failure; never fake fallback content. */
-  }
+  const guides = await getGuides();
+  const snapshotAt = new Date().toISOString();
   return (
     <>
       <header className="site-header">
@@ -40,29 +35,19 @@ export default async function Home() {
           </div>
           <div className="intro-note">
             <span className="read-only-dot" />
-            Read-only Sanity content<span>Browser-local experiments</span>
+            Published Sanity snapshot<span>Browser-local experiments</span>
           </div>
         </section>
-        {guides ? (
-          <Lab guides={guides} />
-        ) : (
-          <section className="service-error">
-            <h2>The guide library is unavailable</h2>
-            <p>
-              We could not load valid published content from Sanity. Your saved
-              experiments have not been changed.
-            </p>
-            <Link href="/">Try loading again ↗</Link>
-          </section>
-        )}
+        <Lab guides={guides} />
         <section className="provenance">
           <div>
             <h2>Structured content. Explainable findings.</h2>
             <p>
               Sanity stores tool releases, capability prerequisites and ordered
-              guide steps. The server queries published content; deterministic
-              browser checks explain each dependency and version conflict.
-              Everything here is fictional.
+              guide steps. This snapshot was queried at build time;
+              deterministic browser checks explain each dependency and version
+              conflict. Everything here is fictional. Content updates require
+              rebuilding.
             </p>
           </div>
           <a href={publicDatasetUrl} target="_blank" rel="noreferrer">
@@ -74,7 +59,12 @@ export default async function Home() {
         </section>
       </main>
       <footer>
-        <span>Built with Next.js + Sanity</span>
+        <span>
+          Sanity snapshot:{" "}
+          <time dateTime={snapshotAt}>
+            {snapshotAt.slice(0, 16).replace("T", " ")} UTC
+          </time>
+        </span>
         <span>Designed and coded with OpenAI Codex · No runtime AI</span>
         <span>MIT source</span>
       </footer>
