@@ -1,0 +1,20 @@
+{
+  "name": "runbook-repair-lab",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "seed": "node --env-file=sanity/.env.local scripts/seed.mjs",
+    "build": "npm --prefix web run build",
+    "lint": "npm --prefix web run lint",
+    "dev": "npm --prefix web run dev",
+    "start": "npm --prefix web run start",
+    "test:browser": "node tests/browser.mjs",
+    "verify:backend": "node --experimental-strip-types scripts/verify-public.mjs",
+    "check:secrets": "node scripts/check-secrets.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.60.0"
+  }
+}

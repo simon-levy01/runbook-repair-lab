@@ -1,0 +1,30 @@
+{
+  "tool": [
+    {"key":"grove","title":"Grove CLI","releases":[1,2,3]},
+    {"key":"loom","title":"Loom Engine","releases":[2,3,4]},
+    {"key":"beacon","title":"Beacon Kit","releases":[1,2,3]}
+  ],
+  "prerequisite": [
+    {"key":"workspace","title":"Toy workspace","detail":"An empty fictional project folder is available.","capability":"workspace"},
+    {"key":"blueprint","title":"Paper-town blueprint","detail":"The pretend scene template has been supplied.","capability":"blueprint"},
+    {"key":"palette","title":"Color palette","detail":"A sample set of imaginary colors is available.","capability":"palette"},
+    {"key":"tiles","title":"Sample tiles","detail":"Three fictional map tiles have been prepared.","capability":"tiles"}
+  ],
+  "guide": [
+    {"key":"paper-town","title":"Build a paper town","summary":"Assemble an imaginary town from a blueprint, then render a miniature preview. An older CLI meets a newer scene format.","difficulty":"Starter","prerequisites":[{"_type":"reference","_ref":"$ref:workspace"},{"_type":"reference","_ref":"$ref:blueprint"}],"defaults":[{"_key":"grove-default","_type":"toolDefault","tool":{"_type":"reference","_ref":"$ref:grove"},"version":1},{"_key":"loom-default","_type":"toolDefault","tool":{"_type":"reference","_ref":"$ref:loom"},"version":4}],"steps":[
+      {"_key":"town-init","_type":"guideStep","title":"Prepare the town scene","detail":"The scene builder needs an empty workspace and the paper-town blueprint.","example":"grove toy init --blueprint paper-town","needs":["workspace","blueprint"],"gives":["town-scene"],"tools":[{"_key":"grove-init","_type":"toolRequirement","tool":{"_type":"reference","_ref":"$ref:grove"},"min":2,"max":3}]},
+      {"_key":"town-render","_type":"guideStep","title":"Render a miniature preview","detail":"The preview format is supported by Loom Engine v2 and v3.","example":"loom toy preview --scene paper-town","needs":["town-scene"],"gives":["town-preview"],"tools":[{"_key":"loom-preview","_type":"toolRequirement","tool":{"_type":"reference","_ref":"$ref:loom"},"min":2,"max":3}]},
+      {"_key":"town-check","_type":"guideStep","title":"Review the pretend skyline","detail":"Review the preview in this imaginary workflow. No files are created here.","example":"grove toy review --preview paper-town","needs":["town-preview"],"gives":["town-reviewed"],"tools":[{"_key":"grove-review","_type":"toolRequirement","tool":{"_type":"reference","_ref":"$ref:grove"},"min":2,"max":3}]}
+    ]},
+    {"key":"lantern","title":"Light a lantern garden","summary":"Add imaginary lanterns to a miniature garden. Check the palette first and keep the kit on a compatible release.","difficulty":"Starter","prerequisites":[{"_type":"reference","_ref":"$ref:workspace"},{"_type":"reference","_ref":"$ref:palette"}],"defaults":[{"_key":"beacon-default","_type":"toolDefault","tool":{"_type":"reference","_ref":"$ref:beacon"},"version":3}],"steps":[
+      {"_key":"garden-create","_type":"guideStep","title":"Create the garden layout","detail":"An empty toy workspace supplies the starting surface.","example":"beacon toy garden --layout spiral","needs":["workspace"],"gives":["garden-layout"],"tools":[{"_key":"beacon-create","_type":"toolRequirement","tool":{"_type":"reference","_ref":"$ref:beacon"},"min":1,"max":2}]},
+      {"_key":"garden-light","_type":"guideStep","title":"Choose the lantern colors","detail":"The color palette and a valid layout are both needed before the lanterns can be arranged.","example":"beacon toy lanterns --palette moonlight","needs":["garden-layout","palette"],"gives":["lit-garden"],"tools":[{"_key":"beacon-light","_type":"toolRequirement","tool":{"_type":"reference","_ref":"$ref:beacon"},"min":2,"max":2}]},
+      {"_key":"garden-view","_type":"guideStep","title":"Preview the lantern garden","detail":"An earlier successful step must have produced the lit garden.","example":"beacon toy preview --garden lanterns","needs":["lit-garden"],"gives":["garden-preview"],"tools":[{"_key":"beacon-view","_type":"toolRequirement","tool":{"_type":"reference","_ref":"$ref:beacon"},"min":1,"max":2}]}
+    ]},
+    {"key":"atlas","title":"Stitch a pocket atlas","summary":"Combine fictional tiles into a pocket-sized map. Skip an earlier step to see why downstream outputs disappear.","difficulty":"Intermediate","prerequisites":[{"_type":"reference","_ref":"$ref:workspace"},{"_type":"reference","_ref":"$ref:tiles"}],"defaults":[{"_key":"grove-default","_type":"toolDefault","tool":{"_type":"reference","_ref":"$ref:grove"},"version":2},{"_key":"loom-default","_type":"toolDefault","tool":{"_type":"reference","_ref":"$ref:loom"},"version":2}],"steps":[
+      {"_key":"atlas-sort","_type":"guideStep","title":"Arrange the sample tiles","detail":"The workspace and sample tiles form an ordered imaginary map.","example":"grove toy tiles --arrange pocket-atlas","needs":["workspace","tiles"],"gives":["ordered-tiles"],"tools":[{"_key":"grove-tiles","_type":"toolRequirement","tool":{"_type":"reference","_ref":"$ref:grove"},"min":2,"max":3}]},
+      {"_key":"atlas-stitch","_type":"guideStep","title":"Stitch the atlas pages","detail":"This atlas format needs Loom Engine v3 or v4.","example":"loom toy stitch --tiles pocket-atlas","needs":["ordered-tiles"],"gives":["atlas-pages"],"tools":[{"_key":"loom-stitch","_type":"toolRequirement","tool":{"_type":"reference","_ref":"$ref:loom"},"min":3,"max":4}]},
+      {"_key":"atlas-preview","_type":"guideStep","title":"Preview the pocket atlas","detail":"The preview consumes atlas pages from the stitching step.","example":"loom toy preview --atlas pocket-atlas","needs":["atlas-pages"],"gives":["atlas-preview"],"tools":[{"_key":"loom-atlas","_type":"toolRequirement","tool":{"_type":"reference","_ref":"$ref:loom"},"min":3,"max":4}]}
+    ]}
+  ]
+}
