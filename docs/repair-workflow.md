@@ -12,4 +12,17 @@ Owner handoff: local Studio at http://localhost:3333, project ipp6nys2. Simon si
 
 Security boundary: custom client checks do not constrain a trusted project administrator who directly uses the API. Standard project members with write permissions can also bypass Studio UI through the API; adding such members changes the trust boundary. There is no claim of server-enforced per-document owner-only RBAC or native workflow enforcement. Anonymous visitors have no write access.
 
-Live owner-authenticated create/approve/reject verification remains pending until Simon signs in. Unit tests or read-only backend checks do not establish that it happened.
+## Verified live owner workflow
+
+After Simon confirmed normal Chrome sign-in, Windows UIAutomation InvokePattern operated only his dedicated Studio window, verified at localhost:3333. No foreground focus, mouse, keystrokes, browser authentication copying or credential extraction was used. Both proposals were observed pending in the genuine public dataset before their explicit decisions.
+
+| Guide                  | Persisted decision | Public approved projection                                                          |
+| ---------------------- | ------------------ | ----------------------------------------------------------------------------------- |
+| Build a paper town     | Approved           | Included; three steps pass with Grove CLI v2, Loom Engine v2 and both prerequisites |
+| Light a lantern garden | Rejected           | Excluded despite compatible conditions                                              |
+
+The owner-only Verify stale guards control submitted two deliberately stale transactions. A stale source revision returned409. A stale proposal revision returned409 after a preceding source metadata patch, proving atomic rollback. Direct document reads confirmed both source/proposal revisions unchanged in each case. No modeled content changed. The diagnostic's impossible revision preconditions guarantee failure; it never performs an approval transition.
+
+The rebuilt local public app loaded the actual approved repair and reset to baseline. The rejected garden offered no approved repair. Six real-data browser groups passed at desktop/tablet/mobile widths with no page errors. Unit tests20/20, lint, Next/Studio builds and typecheck passed. The verification script performs public reads plus a denied anonymous same-value write test(403); it is not wholly read-only.
+
+[Safe machine-readable evidence](workflow-evidence.json). [Public decisions query](https://ipp6nys2.api.sanity.io/v2026-09-01/data/query/production?query=*%5B_type%3D%3D%22repairProposal%22%5D%7B_id%2Ctitle%2Cstatus%2Cguide%2Cfingerprint%2Cexperiment%2CreviewedAt%7D). Public-app screenshots under screenshots show approved availability and the repaired desktop/mobile state without private browser chrome. The parent owns deployment to the existing demo and updating the existing DEV entry.

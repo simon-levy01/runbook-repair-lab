@@ -250,6 +250,23 @@ main {
   color: var(--muted);
   font-size: 11px;
 }
+.approval-strip {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.approved-repair {
+  min-height: 40px;
+  padding: 10px 12px;
+  border: 1px solid #c5bbf3;
+  border-radius: 5px;
+  background: #f3f0ff;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+.approved-repair:hover {
+  background: #e9e3ff;
+}
 .status-dot.warning {
   background: #c77933;
 }
@@ -763,4 +780,15 @@ footer {
     min-height: 40px;
   }
 }
-.findings p{font-size:12px}.findings strong{font-size:13px}.contracts{font-size:11px}.command-caption{font-size:11px}
+.findings p {
+  font-size: 12px;
+}
+.findings strong {
+  font-size: 13px;
+}
+.contracts {
+  font-size: 11px;
+}
+.command-caption {
+  font-size: 11px;
+}

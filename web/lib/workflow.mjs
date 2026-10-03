@@ -144,3 +144,35 @@ export function storedExperiment(experiment) {
     })),
   };
 }
+
+/** Owner-only diagnostic: impossible revision preconditions guarantee rollback.
+ * @param {any} source @param {any} proposal @param {string} target @param {string} nonce
+ */
+export function staleGuardMutations(source, proposal, target, nonce) {
+  if (
+    !source?._rev ||
+    !proposal?._rev ||
+    proposal.status !== "approved" ||
+    proposal.guide?._ref !== source._id ||
+    !["source", "proposal"].includes(target)
+  )
+    throw new Error("Invalid stale guard check");
+  return [
+    {
+      patch: {
+        id: source._id,
+        ifRevisionID:
+          source._rev + (target === "source" ? "-intentionally-stale" : ""),
+        set: { repairReviewGuard: nonce },
+      },
+    },
+    {
+      patch: {
+        id: proposal._id,
+        ifRevisionID:
+          proposal._rev + (target === "proposal" ? "-intentionally-stale" : ""),
+        set: { status: proposal.status },
+      },
+    },
+  ];
+}

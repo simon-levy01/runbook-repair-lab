@@ -7,6 +7,7 @@ import {
   validateProposal,
   decisionMutations,
   storedExperiment,
+  staleGuardMutations,
 } from '../web/lib/workflow.mjs'
 type Proposal = {
   _id: string
@@ -16,7 +17,11 @@ type Proposal = {
   status: string
   guide: {_ref: string}
   fingerprint: string
-  experiment: ReturnType<typeof repair>
+  experiment: {
+    prerequisites: string[]
+    disabled: string[]
+    versions: {_key: string; _type: string; tool: {_ref: string}; version: number}[]
+  }
 }
 type Source = {_id: string; _rev: string}
 const reviewQuery = `{ "guides": ${query}, "sources": *[_type in ["guide", "tool", "prerequisite"] && !(_id in path("drafts.**"))]{_id,_rev}, "proposals": *[_type == "repairProposal" && !(_id in path("drafts.**"))] | order(createdAt desc)[0...100] }`
@@ -116,6 +121,40 @@ function ReviewTool() {
       )
     })
   }
+  async function verifyStaleGuards(id: string) {
+    if (!owner || busy) return
+    setBusy(true)
+    try {
+      const proposal = proposals.find((item) => item._id === id)
+      if (!proposal || proposal.status !== 'approved') throw new Error('Expected approved proposal')
+      const ids = [proposal._id, proposal.guide._ref]
+      const before = await client.getDocuments(ids)
+      if (!before[0] || !before[1]) throw new Error('Missing documents')
+      for (const target of ['source', 'proposal']) {
+        let rejected = false
+        try {
+          await client.mutate(
+            staleGuardMutations(before[1], before[0], target, crypto.randomUUID()),
+            {visibility: 'sync'},
+          )
+        } catch (error) {
+          if ((error as {statusCode?: number}).statusCode !== 409) throw error
+          rejected = true
+        }
+        if (!rejected) throw new Error('Expected stale revision rejection')
+        const after = await client.getDocuments(ids)
+        if (after.some((doc, index) => doc?._rev !== before[index]?._rev))
+          throw new Error('Document changed during check')
+      }
+      setMessage(
+        'Both stale guards verified (409). Atomic rollback preserved guide and proposal revisions.',
+      )
+    } catch {
+      setMessage('Stale protection check was not verified. Refresh before retrying.')
+    } finally {
+      setBusy(false)
+    }
+  }
   return (
     <div style={{padding: '2rem', maxWidth: 900, margin: 'auto'}}>
       <h1>Repair review</h1>
@@ -170,6 +209,11 @@ function ReviewTool() {
                 Reject repair
               </button>
             </>
+          )}
+          {proposal.status === 'approved' && (
+            <button disabled={!owner || busy} onClick={() => void verifyStaleGuards(proposal._id)}>
+              Verify stale guards
+            </button>
           )}
         </section>
       ))}

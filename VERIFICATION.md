@@ -43,3 +43,9 @@ The original authenticated Sanity CLI document-validation run was interrupted an
 `node scripts/verify-workflow.mjs`: public proposal count 0; valid unauthenticated same-value guide patch denied with HTTP 403, changed documents 0. No credential sent. Invalid/nonexistent mutation targets were not used as permission evidence.
 
 Independent read-only review found no material source blocker. **Live signed-in proposal creation, approval and rejection remain pending the owner's browser sign-in.** Do not describe this workflow as demonstrated live until those operations and a rebuilt approved snapshot are verified. Source code provides a custom Studio workflow; it does not integrate Sanity App SDK or native Workflows.
+
+## Completed authenticated owner verification
+
+The pending owner sign-in blocker above is resolved. Normal authenticated Studio UI created two genuine pending proposals, approved paper town and rejected lantern garden. Public reads verified both IDs, matching fingerprints and the approved-only projection. Windows accessibility InvokePattern stayed confined to the dedicated Studio window, without foreground focus, mouse or keyboard input. No session data was copied or extracted.
+
+Both live stale transaction tests returned409 and direct document reads confirmed unchanged source/proposal revisions, including rollback of the first patch when the second revision check failed. The rebuilt actual public snapshot loaded the owner-approved repair, passed all three steps and reset; rejected repair was excluded.20 unit tests and six real-data browser groups passed with no page errors. See docs/workflow-evidence.json and docs/repair-workflow.md for exact IDs, public audit link and screenshots. The verification script includes a denied anonymous same-value write test(403), in addition to public reads.

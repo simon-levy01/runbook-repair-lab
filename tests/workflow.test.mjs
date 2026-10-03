@@ -9,6 +9,7 @@ import {
   approvedProposal,
   decisionMutations,
   storedExperiment,
+  staleGuardMutations,
 } from "../web/lib/workflow.mjs";
 const guide = withContentRevision(guides[0]);
 const proposal = {
@@ -110,6 +111,35 @@ test("interrupted retry cannot transition a previously decided proposal", () => 
       "approved",
       [],
       "now",
+      "nonce",
+    ),
+  );
+});
+
+test("stale diagnostics always include an impossible revision and preserve the decision", () => {
+  const source = { _id: guide.id, _rev: "source-rev" };
+  const approved = { ...proposal, status: "approved" };
+  const sourceCheck = staleGuardMutations(source, approved, "source", "nonce");
+  const proposalCheck = staleGuardMutations(
+    source,
+    approved,
+    "proposal",
+    "nonce",
+  );
+  assert.notEqual(sourceCheck[0].patch.ifRevisionID, source._rev);
+  assert.equal(sourceCheck[1].patch.ifRevisionID, approved._rev);
+  assert.equal(proposalCheck[0].patch.ifRevisionID, source._rev);
+  assert.notEqual(proposalCheck[1].patch.ifRevisionID, approved._rev);
+  assert.deepEqual(proposalCheck[1].patch.set, { status: "approved" });
+  assert.throws(() => staleGuardMutations(source, proposal, "source", "nonce"));
+  assert.throws(() =>
+    staleGuardMutations(source, approved, "unknown", "nonce"),
+  );
+  assert.throws(() =>
+    staleGuardMutations(
+      { ...source, _id: "other" },
+      approved,
+      "source",
       "nonce",
     ),
   );

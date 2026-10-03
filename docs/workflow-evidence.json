@@ -1,0 +1,52 @@
+{
+  "projectId": "ipp6nys2",
+  "dataset": "production",
+  "controlMethod": "Windows UIAutomation InvokePattern in the dedicated verified localhost:3333 Studio Chrome window",
+  "foregroundFocusMouseOrKeyboardUsed": false,
+  "authenticationCopiedOrExtracted": false,
+  "proposals": [
+    {
+      "id": "repair-d6ce1109-8244-477f-b88d-7f885d867ba1",
+      "guideId": "cpzPQInBrCoN3lSGL6JQrG",
+      "title": "Build a paper town",
+      "observedTransition": ["pending", "approved"],
+      "conditions": {
+        "prerequisites": ["Toy workspace", "Paper-town blueprint"],
+        "toolVersions": { "Grove CLI": 2, "Loom Engine": 2 },
+        "disabledSteps": []
+      },
+      "currentFingerprintValidated": true,
+      "publicProjectionIncludesRepair": true
+    },
+    {
+      "id": "repair-89a4c7e5-77ff-43ad-81cc-a19f999d017a",
+      "guideId": "gu4Ycht4w1LZ0sMorlizai",
+      "title": "Light a lantern garden",
+      "observedTransition": ["pending", "rejected"],
+      "conditions": {
+        "prerequisites": ["Toy workspace", "Color palette"],
+        "toolVersions": { "Beacon Kit": 2 },
+        "disabledSteps": []
+      },
+      "currentFingerprintValidated": true,
+      "publicProjectionIncludesRepair": false
+    }
+  ],
+  "liveStaleGuardChecks": {
+    "staleSourceHttpStatus": 409,
+    "staleProposalHttpStatus": 409,
+    "atomicRollbackVerifiedByUnchangedGuideAndProposalRevisions": true
+  },
+  "anonymousSameValueWriteAttemptHttpStatus": 403,
+  "browser": {
+    "actualApprovedRepairPassedSteps": 3,
+    "resetRestoredBaselineFindings": true,
+    "rejectedRepairUnavailable": true,
+    "suiteGroupsPassed": 6,
+    "pageErrors": 0,
+    "widths": [1400, 768, 390, 320]
+  },
+  "unitTestsPassed": 20,
+  "nativeWorkflowsOrAppSDKClaimed": false,
+  "deploymentPerformed": false
+}

@@ -87,7 +87,7 @@ function LabExperiment({
             {enabled} / {guide.steps.length} enabled
           </span>
         </div>
-        <section className="status-strip">
+        <section className="status-strip approval-strip">
           <span>
             {approved
               ? "Owner-approved repair available in this snapshot."
@@ -95,6 +95,8 @@ function LabExperiment({
           </span>
           {approved && (
             <button
+              className="approved-repair"
+              disabled={!ready}
               onClick={() =>
                 update(approved, "Loaded owner-approved conditions locally.")
               }
