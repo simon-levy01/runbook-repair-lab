@@ -1,0 +1,130 @@
+{
+  "date": "2026-10-04",
+  "productionSourceCommit": "f3c0fef8d5428ce1d186dd37d64e53a78e3a3e7f",
+  "scope": "Tests and documentation only; production behavior and schemas unchanged",
+  "sanityAccess": "Public GET audit queries only; no credentials, Studio decisions or dataset mutations",
+  "checks": {
+    "unitTestsPassed": 20,
+    "lint": "passed",
+    "freshNextBuild": "passed",
+    "studioTypecheck": "passed"
+  },
+  "local": {
+    "mode": "local-public-sanity-build-snapshot",
+    "base": "http://127.0.0.1:3000",
+    "sanityDocumentIds": [
+      "cpzPQInBrCoN3lSGL6JQrG",
+      "cpzPQInBrCoN3lSGL6JRAg",
+      "gu4Ycht4w1LZ0sMorlizai"
+    ],
+    "passed": [
+      "Required paper-town owner-approved action: three passing steps, zero findings, reset restores findings",
+      "Public audit confirms rejected lantern and no atlas proposal; neither guide exposes an approved action",
+      "All three guides: repair to zero findings, skipped upstream dependency, re-enable and reset",
+      "Interrupted/reloaded experiment restored; guide-local state stays isolated",
+      "Corrupt browser storage resets safely",
+      "Desktop 1400px, mobile 390/320px and tablet 768px: no overflow, repair and reset",
+      "Storage-denied flow remains usable and explains refresh limitation"
+    ],
+    "pageErrors": [],
+    "publishedProposalStates": [
+      {
+        "title": "Build a paper town",
+        "id": "cpzPQInBrCoN3lSGL6JQrG",
+        "states": ["approved"],
+        "actions": 1
+      },
+      {
+        "title": "Light a lantern garden",
+        "id": "gu4Ycht4w1LZ0sMorlizai",
+        "states": ["rejected"],
+        "actions": 0
+      },
+      {
+        "title": "Stitch a pocket atlas",
+        "id": "cpzPQInBrCoN3lSGL6JRAg",
+        "states": [],
+        "actions": 0
+      }
+    ],
+    "negativeControls": [
+      {
+        "guide": "Build a paper town",
+        "wrongExpectedActionCount": 0,
+        "actualActionCount": 1,
+        "result": "strict assertion rejected"
+      },
+      {
+        "guide": "Light a lantern garden",
+        "wrongExpectedActionCount": 1,
+        "actualActionCount": 0,
+        "result": "strict assertion rejected"
+      },
+      {
+        "guide": "Stitch a pocket atlas",
+        "wrongExpectedActionCount": 1,
+        "actualActionCount": 0,
+        "result": "strict assertion rejected"
+      }
+    ]
+  },
+  "hosted": {
+    "mode": "hosted-public-sanity-snapshot",
+    "base": "https://runbook-repair-lab.simonlevy00.chatgpt.site",
+    "sanityDocumentIds": [
+      "cpzPQInBrCoN3lSGL6JQrG",
+      "cpzPQInBrCoN3lSGL6JRAg",
+      "gu4Ycht4w1LZ0sMorlizai"
+    ],
+    "passed": [
+      "Required paper-town owner-approved action: three passing steps, zero findings, reset restores findings",
+      "Public audit confirms rejected lantern and no atlas proposal; neither guide exposes an approved action",
+      "All three guides: repair to zero findings, skipped upstream dependency, re-enable and reset",
+      "Interrupted/reloaded experiment restored; guide-local state stays isolated",
+      "Corrupt browser storage resets safely",
+      "Desktop 1400px, mobile 390/320px and tablet 768px: no overflow, repair and reset",
+      "Storage-denied flow remains usable and explains refresh limitation"
+    ],
+    "pageErrors": [],
+    "publishedProposalStates": [
+      {
+        "title": "Build a paper town",
+        "id": "cpzPQInBrCoN3lSGL6JQrG",
+        "states": ["approved"],
+        "actions": 1
+      },
+      {
+        "title": "Light a lantern garden",
+        "id": "gu4Ycht4w1LZ0sMorlizai",
+        "states": ["rejected"],
+        "actions": 0
+      },
+      {
+        "title": "Stitch a pocket atlas",
+        "id": "cpzPQInBrCoN3lSGL6JRAg",
+        "states": [],
+        "actions": 0
+      }
+    ],
+    "negativeControls": [
+      {
+        "guide": "Build a paper town",
+        "wrongExpectedActionCount": 0,
+        "actualActionCount": 1,
+        "result": "strict assertion rejected"
+      },
+      {
+        "guide": "Light a lantern garden",
+        "wrongExpectedActionCount": 1,
+        "actualActionCount": 0,
+        "result": "strict assertion rejected"
+      },
+      {
+        "guide": "Stitch a pocket atlas",
+        "wrongExpectedActionCount": 1,
+        "actualActionCount": 0,
+        "result": "strict assertion rejected"
+      }
+    ]
+  }
+}

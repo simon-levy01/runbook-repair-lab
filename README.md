@@ -67,9 +67,11 @@ Studio can be run with `npm --prefix sanity run dev` and the owner's normal brow
 
 ## Verification
 
-`npm run test:browser` tests the exported app preview. Install Chromium with `npx playwright install chromium` if needed. Tests cover all three guide repairs, skip/re-enable, reset, reload restoration, guide isolation, corrupt/blocked storage, and 1400/768/390/320px layouts. The verified export was built from real public Sanity content, with no synthetic interception. Unit tests use clearly identified checked-in fictional fixtures.
+`npm run test:browser` tests the exported app preview. Install Chromium with `npx playwright install chromium` if needed. The suite requires paper town's owner-approved action to produce three passing steps and zero findings, and requires no approved action for lantern garden or pocket atlas. Public GET queries verify the contest dataset's approved/rejected/absent proposal states. Three deliberately wrong action-count expectations must raise the matching strict assertion errors. Tests also cover all three guide repairs, skip/re-enable, reset, reload restoration, guide isolation, corrupt/blocked storage, and 1400/768/390/320px layouts. Uncaught page exceptions are collected in both browser contexts. Unit tests use clearly identified checked-in fictional fixtures.
 
-`npm run check:secrets` scans tracked source, built browser assets and the export for credential patterns and excluded files. Generated screenshots/results and build outputs remain Git-ignored.
+Set `TEST_BASE_URL` to the hosted demo to run the same assertions there. Results and screenshots are written to `output/playwright/local/` or `output/playwright/hosted/`. This regression suite is intentionally pinned to the published contest dataset; content or approval changes require deliberate expectation updates and rebuilding the public snapshot. See [current local and hosted approval evidence](docs/approval-regression-evidence.json).
+
+`npm run check:secrets` scans tracked source, built browser assets and the export for credential patterns and excluded files. QA artifacts under `output/` and build outputs remain Git-ignored. Curated public-app evidence under `docs/screenshots/` is tracked.
 
 See [PLAN.md](PLAN.md), [BUILD_LOG.md](BUILD_LOG.md), and [VERIFICATION.md](VERIFICATION.md) for decisions and evidence.
 
